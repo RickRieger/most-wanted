@@ -77,6 +77,7 @@ function mainMenu(person, people) {
             //! TODO: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
+            console.log(personDescendants)
             alert(personDescendants);
             break;
         case "restart":
@@ -123,7 +124,7 @@ function displayPeople(people) {
     alert(
         people
             .map(function (person) {
-                return `${person.firstName} ${person.lastName}`;
+                return `${person.relationship} ${person.firstName} ${person.lastName}`;
             })
             .join("\n")
     );
@@ -194,25 +195,56 @@ function findPersonInfo(person){
     return displayPerson(person)
 }
 
+
+function addRelationShip(arr, relationship){
+
+   arr.forEach((person)=>{
+       person.relationship = relationship
+   }
+)
+   return arr
+
+}
+
+
 function findPersonFamily(person, people){
     let family = [];
     let spouse = people.filter(function(per){
         return per.id === person.currentSpouse;
     });
+    spouse = addRelationShip(spouse, 'Spouse')
+    
     let parents = people.filter(function(per){
         return person.parents.includes(per.id);
     });
+
+    parents = addRelationShip(parents, 'Parent')
+
     let siblings = people.filter(function(per){
+        if(per !== person){
         return person.parents.includes(per.parents[0]||per.parents[1])
+        }
     })
-    console.log(siblings)
- 
+    siblings = addRelationShip(siblings, 'Sibling')
 
+    family = [...spouse, ...parents, ...siblings]
 
-       
- 
-   
+    displayPeople(family)
+}
+
+function findPersonDescendants(person, people, descendants=[]){
+
+    let array = people.filter(function(per){
+        return per.parents.includes(person.id);
+    });
     
+    descendants = [...descendants, ...array]
+    console.log(descendants);
+    if(array.length === 0){
+        return descendants
+    }
+    array.forEach((person)=>{
+       findPersonDescendants(person, people, descendants)
+    })
 
-    //family.push
 }
