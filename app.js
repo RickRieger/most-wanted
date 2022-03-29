@@ -77,7 +77,7 @@ function mainMenu(person, people) {
             //! TODO: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            console.log(personDescendants)
+            //console.log(personDescendants)
             alert(personDescendants);
             break;
         case "restart":
@@ -240,15 +240,45 @@ function findPersonDescendants(person, people, descendants=[]){
     
     descendants = [...descendants, ...array]
     console.log(descendants);
-    if(array.length === 0){
-        return descendants
-    }
+    
     array.forEach((person)=>{
        findPersonDescendants(person, people, descendants)
     })
+    if(array.length === 0){
+        return descendants
+    }
 
     descendants = addRelationShip(descendants, 'Descendant')
 
     displayPeople(descendants)
 
 }
+
+function searchByTrait(people){
+    let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant').toLowerCase();
+
+
+    userSearch = userSearch.split(/;| /)
+    let searchCriteria = {}
+    for(let i =0; i< userSearch.length; i= i+2){
+        searchCriteria[userSearch[i]] = userSearch[i+1]
+    }
+    console.log(searchCriteria);
+
+    let results = []
+    let key2 = ''
+    for(let key in searchCriteria){
+        let result = people.filter(function(person){
+            if (key = 'eyecolor'){
+                key2 = 'eyeColor'
+            } else if(key = 'currentspouse'){
+                key2 = 'currentSpouse'
+            }
+            return person[key2] == searchCriteria[key]
+        })
+        results = [...results, ...result]
+    }
+
+    return results
+}
+
