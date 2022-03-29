@@ -121,13 +121,25 @@ function searchByName(people) {
  * @param {Array} people        A collection of person objects.
  */
 function displayPeople(people) {
-    alert(
-        people
-            .map(function (person) {
-                return `${person.relationship}: ${person.firstName} ${person.lastName}`;
-            })
-            .join("\n")
-    );
+    if(people[0].relationship){
+        alert(
+            people
+                .map(function (person) {
+                    return `${person.relationship}: ${person.firstName} ${person.lastName}`;
+                })
+                .join("\n")
+        );
+
+    }else{
+        alert(
+            people
+                .map(function (person) {
+                    return `${person.firstName} ${person.lastName}`;
+                })
+                .join("\n")
+        );
+
+    }
 }
 // End of displayPeople()
 
@@ -259,6 +271,7 @@ function searchByTrait(people){
 
 
     userSearch = userSearch.split(/;| /)
+
     let searchCriteria = {}
     for(let i =0; i< userSearch.length; i= i+2){
         searchCriteria[userSearch[i]] = userSearch[i+1]
@@ -273,12 +286,14 @@ function searchByTrait(people){
                 key2 = 'eyeColor'
             } else if(key = 'currentspouse'){
                 key2 = 'currentSpouse'
+            }else{
+                key2 = key
             }
             return person[key2] == searchCriteria[key]
         })
         results = [...results, ...result]
     }
 
-    return results
+    displayPeople(results)
 }
 
