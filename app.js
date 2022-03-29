@@ -203,10 +203,15 @@ function findPersonFamily(person, people){
         return person.parents.includes(per.id);
     });
     let siblings = people.filter(function(per){
-        for per
-        return person.parents.includes(per.parents);
+        return person.parents.includes(per.parents[0]||per.parents[1])
     })
-    console.log(siblings);
+    console.log(siblings)
+ 
+
+
+       
+ 
+   
     
 
     //family.push
