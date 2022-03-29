@@ -124,7 +124,7 @@ function displayPeople(people) {
     alert(
         people
             .map(function (person) {
-                return `${person.relationship} ${person.firstName} ${person.lastName}`;
+                return `${person.relationship}: ${person.firstName} ${person.lastName}`;
             })
             .join("\n")
     );
@@ -246,5 +246,9 @@ function findPersonDescendants(person, people, descendants=[]){
     array.forEach((person)=>{
        findPersonDescendants(person, people, descendants)
     })
+
+    descendants = addRelationShip(descendants, 'Descendant')
+
+    displayPeople(descendants)
 
 }
