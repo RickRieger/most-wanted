@@ -63,7 +63,6 @@ function mainMenu(person, people) {
     // Routes our application based on the user's input
     switch (displayOption) {
         case "info":
-            //! TODO: Declare a findPersonInfo function //////////////////////////////////////////
             // HINT: Look for a person-object stringifier utility function to help
             let personInfo = findPersonInfo(person[0]);
             alert(personInfo);
@@ -193,4 +192,22 @@ function chars(input) {
 //Tessa&Rick - this findPersonInfo function seems redundant - why do we need this if we have display info?
 function findPersonInfo(person){
     return displayPerson(person)
+}
+
+function findPersonFamily(person, people){
+    let family = [];
+    let spouse = people.filter(function(per){
+        return per.id === person.currentSpouse;
+    });
+    let parents = people.filter(function(per){
+        return person.parents.includes(per.id);
+    });
+    let siblings = people.filter(function(per){
+        for per
+        return person.parents.includes(per.parents);
+    })
+    console.log(siblings);
+    
+
+    //family.push
 }
