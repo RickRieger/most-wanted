@@ -191,6 +191,7 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 //Tessa&Rick - this findPersonInfo function seems redundant - why do we need this if we have display info?
-// function findPersonInfo(person){
-
-// }
+function findPersonInfo(person){
+    let personInfo = displayPerson(person)
+    return personInfo
+}
