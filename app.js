@@ -263,7 +263,7 @@ function findPersonDescendants(person, people, descendants=[]){
 
 function searchByTrait(people){
 
-    let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant');
+    let userSearch = prompt('Enter your search criteria - if searching multiple criteria, separate with a semicolon.\nSee available search criteria below (note that the search is case sensitive):\nid\nfirstName\nlastName\ngender\ndob\nheight\nweight\neyeColor\noccupation\nparents\ncurrentSpouse\nSingle-Criteria Example: \nweight 199 \nMulti-Criteria Example: \nweight 199;eyeColor brown;occupation assistant');
     userSearch = userSearch.split(/;| /)
 
     //Original method of multi-search:
@@ -301,7 +301,7 @@ function searchByTrait(people){
 
     console.log(results)
     if (results.length === 0){
-        alert('We didn\'t find any matching results. Please try new search criteria.');
+        alert('We didn\'t find any matching results. Please try new search criteria. Double check your search criteria for spelling.');
         searchByTrait(people)
     } displayPeople(results)
 }
