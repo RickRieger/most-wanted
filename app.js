@@ -72,7 +72,7 @@ function mainMenu(person, people) {
             break;
         case "descendants":
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            //alert(personDescendants);
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -245,19 +245,21 @@ function findPersonDescendants(person, people, descendants=[]){
     });
     
     descendants = [...descendants, ...array]
-    console.log(descendants);
     
     array.forEach((person)=>{
        findPersonDescendants(person, people, descendants)
     })
     if(array.length === 0){
+        if(descendants.length === 0){
+            alert(`${person.firstName} ${person.lastName} doesn't have any descendants.`);
+            app(people)
+        }
         return descendants
     }
 
-    descendants = addRelationShip(descendants, 'Descendant')
-
+    descendants = addRelationShip(descendants, 'Descendant');
     displayPeople(descendants)
-
+    
 }
 
 
@@ -299,7 +301,6 @@ function searchByTrait(people){
     //     return true;
     //     });
 
-    console.log(results)
     if (results.length === 0){
         alert('We didn\'t find any matching results. Please try new search criteria. Double check your search criteria for spelling.');
         searchByTrait(people)
