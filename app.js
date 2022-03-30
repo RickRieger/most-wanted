@@ -300,6 +300,9 @@ function searchByTrait(people){
     //     });
 
     console.log(results)
-    displayPeople(results)
+    if (results.length === 0){
+        alert('We didn\'t find any matching results. Please try new search criteria.');
+        searchByTrait(people)
+    } displayPeople(results)
 }
 
