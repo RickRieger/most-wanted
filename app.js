@@ -29,7 +29,6 @@ function app(people) {
             searchResults = searchByName(people);
             break;
         case "no":
-            //! TODO: Declare a searchByTrait function //////////////////////////////////////////
             searchResults = searchByTrait(people);
             break;
         default:
@@ -68,16 +67,11 @@ function mainMenu(person, people) {
             alert(personInfo);
             break;
         case "family":
-            //! TODO: Declare a findPersonFamily function //////////////////////////////////////////
-            // HINT: Look for a people-collection stringifier utility function to help
             let personFamily = findPersonFamily(person[0], people);
             alert(personFamily);
             break;
         case "descendants":
-            //! TODO: Declare a findPersonDescendants function //////////////////////////////////////////
-            // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            //console.log(personDescendants)
             alert(personDescendants);
             break;
         case "restart":
@@ -202,7 +196,7 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
-//Tessa&Rick - this findPersonInfo function seems redundant - why do we need this if we have display info?
+
 function findPersonInfo(person){
     return displayPerson(person)
 }
@@ -266,63 +260,13 @@ function findPersonDescendants(person, people, descendants=[]){
 
 }
 
-// function searchByTrait(people){
-//     let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant').toLowerCase();
-
-
-//     userSearch = userSearch.split(/;| /)
-
-    
-//     let searchCriteria = {}
-//     for(let i =0; i< userSearch.length; i= i+2){
-//         searchCriteria[userSearch[i]] = userSearch[i+1]
-//     }
-//     console.log(searchCriteria);
-
-//     let results = []
-//     let result = []
-//     let key2 = ''
-
-//     //search 1st time using people
-
-//     //gather new array from result searching the 
-    
-//     for(let key in searchCriteria){
-//         result = people.filter(function(person){
-//             if (key = 'eyecolor'){
-//                 key2 = 'eyeColor'
-//             } else if(key = 'currentspouse'){
-//                 key2 = 'currentSpouse'
-//             }else{
-//                 key2 = key
-//             }
-//             return person[key2] == searchCriteria[key]
-//         })
-//         results = [...results, ...result]
-//     }
-
-//     //recursion building a new func
-
-
-//     // "height": 70,
-//     // "weight": 187,
-//     // "eyeColor": "brown",
-
-//     let newSearchArray = people.filter((person)=>{
-//         return person.height === 70 && person.weight === 187 && person.eyeColor === 'brown'
-//     })
-
-//     displayPeople(newSearchArray)
-// }
-
 
 function searchByTrait(people){
 
     let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant');
-
-
     userSearch = userSearch.split(/;| /)
 
+    //Original method of multi-search:
     let results = people.filter((person)=>{
     return  person[userSearch[0]] == userSearch[1]
     })
@@ -337,9 +281,25 @@ function searchByTrait(people){
         }
     }
 
+    //Newer method of multi-search (after research) below: iterates through people and only adds them to the results array if they hit all criteria
+    
+    // let searchCriteria = {}
+    // for(let i =0; i< userSearch.length; i= i+2){
+    //     searchCriteria[userSearch[i]] = userSearch[i+1]
+    // }
+    // //console.log(searchCriteria);
+
+    // let results = [];
+
+    // results = people.filter(function(person) {
+    //     for (var key in searchCriteria) {
+    //         if (person[key] === undefined || person[key] != searchCriteria[key])
+    //         return false;
+    //     }
+    //     return true;
+    //     });
+
     console.log(results)
-
     displayPeople(results)
-
 }
 
