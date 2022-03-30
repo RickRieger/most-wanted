@@ -279,9 +279,10 @@ function searchByTrait(people){
     console.log(searchCriteria);
 
     let results = []
+    let result = []
     let key2 = ''
     for(let key in searchCriteria){
-        let result = people.filter(function(person){
+        result = people.filter(function(person){
             if (key = 'eyecolor'){
                 key2 = 'eyeColor'
             } else if(key = 'currentspouse'){
@@ -294,6 +295,19 @@ function searchByTrait(people){
         results = [...results, ...result]
     }
 
-    displayPeople(results)
+    //recursion building a new func
+
+
+    // "height": 70,
+    // "weight": 187,
+    // "eyeColor": "brown",
+
+    let newSearchArray = people.filter((person)=>{
+        return person.height === 70 && person.weight === 187 && person.eyeColor === 'brown'
+    })
+
+
+
+    displayPeople(newSearchArray)
 }
 
