@@ -125,11 +125,21 @@ function searchByName(people) {
  * @param {Array} people        A collection of person objects.
  */
 function displayPeople(people) {
-  if (people[0].relationship) {
-    alert(
-      people
-        .map(function (person) {
-          return `${person.relationship}: ${person.firstName} ${person.lastName}`;
+    if(people[0].relationship === 'Descendant'){
+        alert(
+            people
+                .map(function(person){
+                    if(people.indexOf(person) === 0){
+                        return `${person.firstName} ${person.lastName}'s Descendants:`
+                    } return `${person.firstName} ${person.lastName}`
+                })
+                .join('\n')
+        )
+    } else if (people[0].relationship) {
+        alert(
+            people
+                .map(function (person) {
+                    return `${person.relationship}: ${person.firstName} ${person.lastName}`;
         })
         .join('\n')
     );
