@@ -266,48 +266,80 @@ function findPersonDescendants(person, people, descendants=[]){
 
 }
 
+// function searchByTrait(people){
+//     let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant').toLowerCase();
+
+
+//     userSearch = userSearch.split(/;| /)
+
+    
+//     let searchCriteria = {}
+//     for(let i =0; i< userSearch.length; i= i+2){
+//         searchCriteria[userSearch[i]] = userSearch[i+1]
+//     }
+//     console.log(searchCriteria);
+
+//     let results = []
+//     let result = []
+//     let key2 = ''
+
+//     //search 1st time using people
+
+//     //gather new array from result searching the 
+    
+//     for(let key in searchCriteria){
+//         result = people.filter(function(person){
+//             if (key = 'eyecolor'){
+//                 key2 = 'eyeColor'
+//             } else if(key = 'currentspouse'){
+//                 key2 = 'currentSpouse'
+//             }else{
+//                 key2 = key
+//             }
+//             return person[key2] == searchCriteria[key]
+//         })
+//         results = [...results, ...result]
+//     }
+
+//     //recursion building a new func
+
+
+//     // "height": 70,
+//     // "weight": 187,
+//     // "eyeColor": "brown",
+
+//     let newSearchArray = people.filter((person)=>{
+//         return person.height === 70 && person.weight === 187 && person.eyeColor === 'brown'
+//     })
+
+//     displayPeople(newSearchArray)
+// }
+
+
 function searchByTrait(people){
-    let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant').toLowerCase();
+
+    let userSearch = prompt('Enter your search criteria. \nSingle-Criteria Example: \nWeight 199 \nMulti-Criteria Example: \nWeight 199;EyeColor brown;Occupation assistant');
 
 
     userSearch = userSearch.split(/;| /)
 
-    let searchCriteria = {}
-    for(let i =0; i< userSearch.length; i= i+2){
-        searchCriteria[userSearch[i]] = userSearch[i+1]
-    }
-    console.log(searchCriteria);
-
-    let results = []
-    let result = []
-    let key2 = ''
-    for(let key in searchCriteria){
-        result = people.filter(function(person){
-            if (key = 'eyecolor'){
-                key2 = 'eyeColor'
-            } else if(key = 'currentspouse'){
-                key2 = 'currentSpouse'
-            }else{
-                key2 = key
-            }
-            return person[key2] == searchCriteria[key]
-        })
-        results = [...results, ...result]
-    }
-
-    //recursion building a new func
-
-
-    // "height": 70,
-    // "weight": 187,
-    // "eyeColor": "brown",
-
-    let newSearchArray = people.filter((person)=>{
-        return person.height === 70 && person.weight === 187 && person.eyeColor === 'brown'
+    let results = people.filter((person)=>{
+    return  person[userSearch[0]] == userSearch[1]
     })
+    
+    if(userSearch.length > 2){
+        for(let i = 2; i < userSearch.length; i = i + 2){
 
+            results = results.filter((person)=>{
+                return  person[userSearch[i]] == userSearch[i + 1]
+                })
 
+        }
+    }
 
-    displayPeople(newSearchArray)
+    console.log(results)
+
+    displayPeople(results)
+
 }
 
